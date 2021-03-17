@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  redis:
+    image: redis:5
+    container_name: dinamicka-leaderboard-redis
+    ports:
+      - 6379:6379
+    restart: always
+    networks:
+      - dinamicka
+  api:
+    build:
+      context: .
+    env_file:
+      - .env
+    image: dinamicka-leaderboard-api
+    container_name: dinamicka-leaderboard-api
+    ports:
+    - 5000:5000
+    volumes:
+    - ./seed.json:/seed.json
+    - ./public:/public
+    restart: always
+    depends_on:
+      - redis
+    networks:
+      - dinamicka
+networks:
+  dinamicka:
+    driver: bridge
+
