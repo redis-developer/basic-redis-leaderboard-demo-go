@@ -1,6 +1,9 @@
 package redis
 
-import "github.com/go-redis/redis"
+import (
+	"github.com/go-redis/redis"
+	"github.com/redis-developer/basic-redis-leaderboard-demo-go/controller"
+)
 
 type Value struct {
 	Score float64
@@ -21,32 +24,42 @@ func (r Redis) HSet(key, field string, value interface{}) error {
 func (r Redis) ZAdd(key string, member string, score float64) error {
 	return r.client.ZAdd(key, redis.Z{Member: member, Score: score}).Err()
 }
-func (r Redis) ZRevRange(key string, start, stop int64) (map[string]float64, error) {
+func (r Redis) ZRevRange(key string, start, stop int64) ([]*controller.Company, error) {
 	z, err := r.client.ZRevRangeWithScores(key, start, stop).Result()
 	if err != nil {
 		return nil, err
 	}
 
-	values := make(map[string]float64, len(z))
+	companies := make([]*controller.Company, 0, len(z))
+
 	for i := range z {
-		values[z[i].Member.(string)] = z[i].Score
+		companies = append(companies, &controller.Company{
+			Symbol:    z[i].Member.(string),
+			MarketCap: z[i].Score,
+		})
+		//values[z[i].Member.(string)] = z[i].Score
 	}
 
-	return values, nil
+	return companies, nil
 
 }
 
-func (r Redis) ZRange(key string, start, stop int64) (map[string]float64, error) {
+func (r Redis) ZRange(key string, start, stop int64) ([]*controller.Company, error) {
 	z, err := r.client.ZRangeWithScores(key, start, stop).Result()
 	if err != nil {
 		return nil, err
 	}
 
-	values := make(map[string]float64, len(z))
+	n := len(z)
+	companies := make([]*controller.Company, 0, n)
+
 	for i := range z {
-		values[z[i].Member.(string)] = z[i].Score
+		companies = append(companies, &controller.Company{
+			Symbol:    z[n-i-1].Member.(string),
+			MarketCap: z[n-i-1].Score,
+		})
 	}
-	return values, err
+	return companies, err
 }
 
 func (r Redis) ZScore(key, member string) (float64, error) {

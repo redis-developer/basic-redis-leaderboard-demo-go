@@ -13,15 +13,15 @@ func main() {
 
 	newConfig := config.NewConfig()
 
-	newServer := api.NewServer(newConfig.Api)
 	newRedis := redis.NewRedis(newConfig.Redis)
+	newServer := api.NewServer(newConfig.Api)
+
+	controller.SetRedis(newRedis)
 
 	err := controller.ImportCompanies(newConfig.Import.Path(), newRedis)
 	if err != nil {
 		log.Fatalln(err)
 	}
-
-	controller.SetRedis(newRedis)
 
 	internal.Waiting(newServer, newRedis)
 

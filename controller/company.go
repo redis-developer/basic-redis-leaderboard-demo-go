@@ -9,7 +9,7 @@ type Company struct {
 	Symbol    string  `json:"symbol"`
 	Company   string  `json:"company"`
 	Country   string  `json:"country"`
-	MarketCap float64 `json:"market_cap"`
+	MarketCap float64 `json:"marketCap"`
 	Rank      int     `json:"rank"`
 }
 

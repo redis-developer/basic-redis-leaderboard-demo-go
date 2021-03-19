@@ -2,7 +2,6 @@ package controller
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/go-redis/redis"
 	"log"
 	"os"
@@ -18,50 +17,128 @@ type Controller struct {
 	r Redis
 }
 
+func (c Controller) sort(companies []*Company) {
+
+	for i := range companies {
+		for j := range companies {
+			if companies[i].Rank < companies[j].Rank {
+				a := *companies[i]
+				b := *companies[j]
+				*companies[i] = b
+				*companies[j] = a
+			}
+		}
+	}
+}
+
+func (c Controller) buildRanks(companies []*Company) {
+	allCompanies, err := c.r.ZRevRange(keyLeaderBoard, 0, -1)
+	if err != nil {
+		log.Println(err)
+	}
+	ranks := make(map[string]int, len(allCompanies))
+	for i := range allCompanies {
+		key := allCompanies[i].GetKey()
+		ranks[key] = i + 1
+	}
+	for i := range companies {
+		if rank, ok := ranks[companies[i].GetKey()]; ok {
+			companies[i].Rank = rank
+		}
+	}
+}
+
+func (c Controller) buildCompany(company *Company) {
+	key := company.GetKey()
+	data, err := c.r.HGetAll(key)
+	if err == redis.Nil {
+		return
+	} else if err != nil {
+		log.Println(err)
+		return
+	}
+
+	company.Symbol = data["symbol"]
+	company.Company = data["company"]
+	company.Country = data["country"]
+}
+
+func (c Controller) buildCompanies(companies []*Company) {
+	for i := range companies {
+		companies[i].Rank = i + 1
+		c.buildCompany(companies[i])
+	}
+}
+
 func (c Controller) All() ([]*Company, error) {
-	list, err := c.r.ZRevRange(keyLeaderBoard, 0, -1)
+	companies, err := c.r.ZRevRange(keyLeaderBoard, 0, -1)
 	if err != nil {
 		return nil, err
 	}
-	log.Println(list)
-	companies := make([]*Company, 0)
-	rank := 0
-	for symbol := range list {
-		key := fmt.Sprintf("%s%s", keyPrefixCompany, symbol)
-		data, err := c.r.HGetAll(key)
-		if err == redis.Nil {
-			continue
-		} else if err != nil {
-			return nil, err
-		}
-		rank++
-		companies = append(companies, &Company{
-			Symbol:    data["symbol"],
-			Company:   data["company"],
-			Country:   data["country"],
-			MarketCap: list[symbol],
-			Rank:      rank,
-		})
-
-	}
-
+	c.buildCompanies(companies)
 	return companies, nil
 }
 
 func (c Controller) Top10() ([]*Company, error) {
-	return c.All()
+	companies, err := c.r.ZRevRange(keyLeaderBoard, 0, 9)
+	if err != nil {
+		return nil, err
+	}
+	c.buildCompanies(companies)
+	c.buildRanks(companies)
+	return companies, nil
 }
 
 func (c Controller) Bottom10() ([]*Company, error) {
-	return c.All()
+	companies, err := c.r.ZRange(keyLeaderBoard, 0, 9)
+	if err != nil {
+		return nil, err
+	}
+	c.buildCompanies(companies)
+	c.buildRanks(companies)
+	return companies, nil
 }
 
-func (c Controller) InRank(start, end int) ([]*Company, error) {
-	return c.All()
+func (c Controller) InRank(start, end int64) ([]*Company, error) {
+	companies, err := c.r.ZRevRange(keyLeaderBoard, start, end)
+	if err != nil {
+		return nil, err
+	}
+	c.buildCompanies(companies)
+	c.buildRanks(companies)
+	c.sort(companies)
+	return companies, nil
 }
 
 func (c Controller) GetBySymbol(symbols []string) ([]*Company, error) {
-	return c.All()
+	companies := make([]*Company, 0, len(symbols))
+
+	for i := range symbols {
+		score, err := c.r.ZScore(keyLeaderBoard, strings.ToLower(symbols[i]))
+		if err != nil {
+			return nil, err
+		}
+
+		company := &Company{
+			Symbol:    symbols[i],
+			MarketCap: score,
+		}
+
+		c.buildCompany(company)
+
+		companies = append(companies, company)
+	}
+	c.buildRanks(companies)
+	c.sort(companies)
+	return companies, nil
+}
+
+func (c Controller) UpdateRank(symbol string, amount float64) error  {
+	err := c.r.ZIncrBy(keyLeaderBoard, amount, symbol)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 var controller = &Controller{}
