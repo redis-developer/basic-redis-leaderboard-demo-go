@@ -2,19 +2,18 @@ version: '3.8'
 services:
   redis:
     image: redis:5
-    container_name: dinamicka-leaderboard-redis
-    ports:
-      - 6379:6379
+    container_name: leaderboard-redis
+    hostname: leaderboard-redis
     restart: always
     networks:
-      - dinamicka
+      - leaderboard-demo
   api:
     build:
       context: .
     env_file:
       - .env
-    image: dinamicka-leaderboard-api
-    container_name: dinamicka-leaderboard-api
+    image: leaderboard-api
+    container_name: leaderboard-api
     ports:
     - 5000:5000
     volumes:
@@ -24,8 +23,8 @@ services:
     depends_on:
       - redis
     networks:
-      - dinamicka
+      - leaderboard-demo
 networks:
-  dinamicka:
+  leaderboard-demo:
     driver: bridge
 
