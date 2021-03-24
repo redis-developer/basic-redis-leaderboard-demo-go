@@ -25,6 +25,14 @@
     "IMPORT_PATH": {
       "description": "Path to seed.json file for import",
       "value": "/api/seed.json"
+    },
+    "API_PORT": {
+      "description": "Api public port",
+      "value": 5000
+    },
+    "API_TLS_DISABLED": {
+      "description": "Disable TLS",
+      "value": true
     }
   }
 }
