@@ -9,6 +9,8 @@ const (
 	envConfigApiHost       = "API_HOST"
 	envConfigApiPort       = "API_PORT"
 	envConfigApiPublicPath = "API_PUBLIC_PATH"
+
+	envExternalConfigApiPort = "PORT"
 )
 
 type Api struct {

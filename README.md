@@ -12,7 +12,7 @@ Show how the redis works with Golang.
 
 <p>
     <a href="https://heroku.com/deploy" target="_blank">
-        <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heorku" width="200px"/>
+        <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" width="200px"/>
     <a>
 </p>
 

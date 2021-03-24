@@ -6,8 +6,8 @@ import (
 )
 
 type Config struct {
-	Api   *Api
-	Redis *Redis
+	Api    *Api
+	Redis  *Redis
 	Import *Import
 }
 
@@ -29,10 +29,20 @@ func envReadNumeric(envName string, defaultValue int) int {
 
 func NewConfig() *Config {
 
+	apiPort := envReadNumeric(envConfigApiPort, defaultConfigApiPort)
+
+	externalEnvApiPort := os.Getenv(envExternalConfigApiPort)
+	if externalEnvApiPort != "" {
+		val, err := strconv.Atoi(externalEnvApiPort)
+		if err == nil {
+			apiPort = val
+		}
+	}
+
 	config := &Config{
 		Api: &Api{
 			host:       envReadString(envConfigApiHost, ""),
-			port:       envReadNumeric(envConfigApiPort, defaultConfigApiPort),
+			port:       apiPort,
 			publicPath: envReadString(envConfigApiPublicPath, defaultConfigApiPublicPath),
 		},
 		Redis: &Redis{

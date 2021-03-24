@@ -10,6 +10,15 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o bin .
 
 FROM golang
 
+ARG PORT=5000
+ARG API_HOST=""
+ARG API_PORT=5000
+ARG API_PUBLIC_PATH=/api/public
+ARG IMPORT_PATH=/api/seed.json
+ARG REDIS_HOST=""
+ARG REDIS_PORT=6379
+ARG REDIS_PASSWORD=""
+
 RUN mkdir /api
 
 WORKDIR /build
