@@ -1,7 +1,7 @@
 {
   "name": "Basic Redis Leaderboard Demo Golang",
   "description": "List of top 100 companies",
-  "repository": "https://github.com/redis-developer/basic-redis-leaderboard-demo-go.git",
+  "repository": "https://github.com/redis-developer/basic-redis-leaderboard-demo-go",
   "logo": "https://redis.io/images/redis-white.png",
   "keywords": ["golang", "gin", "redis", "leadboard"],
   "env": {
@@ -16,6 +16,14 @@
     "REDIS_PASSWORD": {
 	    "description": "Redis server password",
 	    "required": true
+    },
+    "API_PUBLIC_PATH": {
+      "description": "Public path to frontend",
+      "value": "/api/public"
+    },
+    "IMPORT_PATH": {
+      "description": "Path to seed.json file for import",
+      "value": "/api/seed.json"
     }
   }
 }

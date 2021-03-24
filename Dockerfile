@@ -11,14 +11,12 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o bin .
 FROM golang
 
 RUN mkdir /api
-RUN addgroup --system dinamicka
-RUN adduser --system --disabled-password --no-create-home --home /api --ingroup dinamicka dinamicka
-RUN chown dinamicka:dinamicka /api
 
-# Switch current root user to transcoder, prevent running service from root
-USER dinamicka
+WORKDIR /build
 
 COPY --from=builder /build/bin /api/
+COPY seed.json /api/
+COPY public /api/public
 
 WORKDIR /api
 
