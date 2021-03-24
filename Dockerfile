@@ -30,7 +30,7 @@ COPY public /api/public
 
 WORKDIR /api
 
-LABEL   Name="Dinamicka Api"
+LABEL   Name="Leaderboard Api"
 
 #Run service
 ENTRYPOINT ["./bin"]
