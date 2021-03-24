@@ -1,0 +1,21 @@
+{
+  "name": "Basic Redis Leaderboard Demo Golang",
+  "description": "List of top 100 companies",
+  "repository": "https://github.com/redis-developer/basic-redis-leaderboard-demo-go.git",
+  "logo": "https://redis.io/images/redis-white.png",
+  "keywords": ["golang", "gin", "redis", "leadboard"],
+  "env": {
+    "REDIS_HOST": {
+      "description": "Redis server host",
+      "required": true
+    },
+    "REDIS_PORT": {
+      "description": "Redis server PORT",
+      "required": true
+    },
+    "REDIS_PASSWORD": {
+	    "description": "Redis server password",
+	    "required": true
+    }
+  }
+}
