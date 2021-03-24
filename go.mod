@@ -8,4 +8,5 @@ require (
 	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/onsi/ginkgo v1.15.2 // indirect
 	github.com/onsi/gomega v1.11.0 // indirect
+	golang.org/x/crypto v0.0.0-20210322153248-0c34fe9e7dc2
 )

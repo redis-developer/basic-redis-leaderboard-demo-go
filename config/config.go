@@ -27,6 +27,11 @@ func envReadNumeric(envName string, defaultValue int) int {
 	return value
 }
 
+func envReadBool(envName string) bool {
+	value, _ := strconv.ParseBool(os.Getenv(envName))
+	return value
+}
+
 func NewConfig() *Config {
 
 	apiPort := envReadNumeric(envConfigApiPort, defaultConfigApiPort)
@@ -41,9 +46,10 @@ func NewConfig() *Config {
 
 	config := &Config{
 		Api: &Api{
-			host:       envReadString(envConfigApiHost, ""),
-			port:       apiPort,
-			publicPath: envReadString(envConfigApiPublicPath, defaultConfigApiPublicPath),
+			host:        envReadString(envConfigApiHost, ""),
+			port:        apiPort,
+			publicPath:  envReadString(envConfigApiPublicPath, defaultConfigApiPublicPath),
+			tlsDisabled: envReadBool(envConfigApiTLSDisabled),
 		},
 		Redis: &Redis{
 			host:     envReadString(envConfigRedisHost, ""),
