@@ -19,20 +19,13 @@
 	    "required": true
     },
     "API_PUBLIC_PATH": {
-      "description": "Public path to frontend",
-      "value": "/api/public"
+      "description": "Public path to frontend, example `/api/public`"
     },
     "IMPORT_PATH": {
-      "description": "Path to seed.json file for import",
-      "value": "/api/seed.json"
+      "description": "Path to seed.json file for import, example `/api/seed.json`"
     },
     "API_PORT": {
-      "description": "Api public port",
-      "value": 5000
-    },
-    "API_TLS_DISABLED": {
-      "description": "Disable TLS",
-      "value": true
+      "description": "Api public port, example `5000`"
     }
   }
 }

@@ -18,7 +18,7 @@
             "Google": "https://deploy.cloud.run/?git_repo=https://github.com/redis-developer/basic-redis-leaderboard-demo-go.git"
         }
     ],
-    "language": ["JavaScript"],
+    "language": ["Golang"],
     "redis_commands": ["HSET", "HGETALL", "ZADD","ZREVRANGE", "ZRANGE", "ZSCORE", "ZINCRBY", "ZCOUNT"],
     "redis_features": ["leaderboard"],
     "redis_modules": [],
