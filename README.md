@@ -17,15 +17,10 @@ Show how the redis works with Golang.
 </p>
 
 <p>
-    <a href="https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fredis-developer%2Fbasic-redis-leaderboard-demo-go&env=API_HOST,API_PORT,API_PUBLIC_PATH,REDIS_HOST,REDIS_PORT,REDIS_PASSWORD" target="_blank">
-        <img src="https://vercel.com/button" alt="Deploy with Vercel" width="200px" height="50px"/>
-    </a>
-</p>
-
-<p>
     <a href="https://deploy.cloud.run" target="_blank">
         <img src="https://deploy.cloud.run/button.svg" alt="Run on Google Cloud" width="200px"/>
     </a>
+
     (See notes: How to run on Google Cloud)
 </p>
 
