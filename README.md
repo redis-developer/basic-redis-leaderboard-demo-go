@@ -6,57 +6,13 @@ Show how the redis works with Golang.
 
 ![How it works](docs/screenshot001.png)
 
-## Try it out
-
-<p>
-    <a href="https://heroku.com/deploy" target="_blank">
-        <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" width="200px"/>
-    <a>
-</p>
-
-<p>
-    <a href="https://deploy.cloud.run" target="_blank">
-        <img src="https://deploy.cloud.run/button.svg" alt="Run on Google Cloud" width="200px"/>
-    </a>
-
-    (See notes: How to run on Google Cloud)
-
-</p>
-
-## How to run on Google Cloud
-
-<p>
-    If you don't have redis yet, plug it in  (https://spring-gcp.saturnism.me/app-dev/cloud-services/cache/memorystore-redis).
-    After successful deployment, you need to manually enable the vpc connector as shown in the pictures:
-</p>
-
-1. Open link google cloud console.
-
-![1 step](docs/1.png)
-
-2. Click "Edit and deploy new revision" button.
-
-![2 step](docs/2.png)
-
-3. Add environment.
-
-![3 step](docs/3.png)
-
-4.  Select vpc-connector and deploy application.
-
-![4 step](docs/4.png)
-
-<a href="https://github.com/GoogleCloudPlatform/cloud-run-button/issues/108#issuecomment-554572173">
-Problem with unsupported flags when deploying google cloud run button
-</a>
-
 # How it works?
 
 ## How the data is stored:
 
-- The company data is stored in a hash like below:
+- The AAPL's details - market cap of 2,6 triillions and USA origin - are stored in a hash like below:
   - E.g `HSET "company:AAPL" symbol "AAPL" market_cap "2600000000000" country USA`
-- The Ranks are stored in a ZSET.
+- The Ranks of AAPL of 2,6 trillions are stored in a <a href="https://redislabs.com/ebook/part-1-getting-started/chapter-1-getting-to-know-redis/1-2-what-redis-data-structures-look-like/1-2-5-sorted-sets-in-redis/">ZSET</a>.
   - E.g `ZADD companyLeaderboard 2600000000000 company:AAPL`
 
 ## How the data is accessed:
@@ -110,3 +66,47 @@ go run
 ```
 
 Follow: http://localhost:5000
+
+## Try it out
+
+<p>
+    <a href="https://heroku.com/deploy" target="_blank">
+        <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" width="200px"/>
+    <a>
+</p>
+
+<p>
+    <a href="https://deploy.cloud.run" target="_blank">
+        <img src="https://deploy.cloud.run/button.svg" alt="Run on Google Cloud" width="200px"/>
+    </a>
+
+    (See notes: How to run on Google Cloud)
+
+</p>
+
+## How to run on Google Cloud
+
+<p>
+    If you don't have redis yet, plug it in  (https://spring-gcp.saturnism.me/app-dev/cloud-services/cache/memorystore-redis).
+    After successful deployment, you need to manually enable the vpc connector as shown in the pictures:
+</p>
+
+1. Open link google cloud console.
+
+![1 step](docs/1.png)
+
+2. Click "Edit and deploy new revision" button.
+
+![2 step](docs/2.png)
+
+3. Add environment.
+
+![3 step](docs/3.png)
+
+4.  Select vpc-connector and deploy application.
+
+![4 step](docs/4.png)
+
+<a href="https://github.com/GoogleCloudPlatform/cloud-run-button/issues/108#issuecomment-554572173">
+Problem with unsupported flags when deploying google cloud run button
+</a>
