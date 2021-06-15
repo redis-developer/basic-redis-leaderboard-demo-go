@@ -120,6 +120,9 @@ If you want to make any changes further, click â€œEdit and Deploy New Revisionâ€
 ![](https://raw.githubusercontent.com/redis-developer/basic-redis-leaderboard-demo-go/master/image4.jpg?v=2&s=2) 
       
 Hence, you should be able to access Rate Limiting app
+      
+![](https://raw.githubusercontent.com/redis-developer/basic-redis-leaderboard-demo-go/master/image5.jpg?v=2&s=2)
+
   
       
 
