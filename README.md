@@ -67,7 +67,7 @@ go get
 go run
 ```
 
-Follow: http://localhost:5000
+Follow: http://localhost:8080
 
 ## Try it out
 
