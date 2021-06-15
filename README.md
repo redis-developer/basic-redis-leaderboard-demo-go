@@ -109,15 +109,15 @@ Open up the link under "Manage this application at Cloud Console" to open up "Ed
       
 
       
-![](https://raw.githubusercontent.com/redis-developer/basic-redis-leaderboard-demo-go/master/image3.jpg?v=2&s=2)
+![](https://raw.githubusercontent.com/redis-developer/basic-redis-leaderboard-demo-go/master/image4.jpg?v=2&s=2)
       
 ## 3. Access the app
       
-![](https://raw.githubusercontent.com/redis-developer/basic-redis-leaderboard-demo-go/master/image4.jpg?v=2&s=2) 
+![](https://raw.githubusercontent.com/redis-developer/basic-redis-leaderboard-demo-go/master/image5.jpg?v=2&s=2) 
       
 Hence, you should be able to access Rate Limiting app
       
-![](https://raw.githubusercontent.com/redis-developer/basic-redis-leaderboard-demo-go/master/image5.jpg?v=2&s=2)
+
 
   
       
