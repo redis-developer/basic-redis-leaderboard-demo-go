@@ -25,7 +25,7 @@
       "description": "Path to seed.json file for import, example `/api/seed.json`"
     },
     "API_PORT": {
-      "description": "Api public port, example `5000`"
+      "description": "Api public port, example `8080`"
     }
   }
 }
