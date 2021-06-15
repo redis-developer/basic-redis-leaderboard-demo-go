@@ -107,9 +107,10 @@ Open up the link under "Manage this application at Cloud Console" to open up "Ed
 
 ## 2. Click “Variables and Secrets”
       
-
       
 ![](https://raw.githubusercontent.com/redis-developer/basic-redis-leaderboard-demo-go/master/image4.jpg?v=2&s=2)
+      
+![](https://raw.githubusercontent.com/redis-developer/basic-redis-leaderboard-demo-go/master/image2.jpg?v=2&s=2)
       
 ## 3. Access the app
       
