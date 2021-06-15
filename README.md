@@ -2,11 +2,6 @@
 
 Show how the redis works with Golang.
 
-## Screenshots
-
-![How it works](https://github.com/redis-developer/basic-redis-leaderboard-demo-go/raw/master/docs/screenshot001.png)
-
-
 
 # How it works?
 
