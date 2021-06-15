@@ -3,7 +3,7 @@ package config
 import "fmt"
 
 const (
-	defaultConfigApiPort       = 5000
+	defaultConfigApiPort       = 8080
 	defaultConfigApiPublicPath = "./public/"
 
 	envConfigApiHost        = "API_HOST"
