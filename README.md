@@ -105,17 +105,17 @@ Add the right values as per your infratsructure:
       
 Open up the link under "Manage this application at Cloud Console"
 
-## 2. Click “Edit and Deploy New Revision”
+## 2. Click “Variables and Secrets”
       
 If you want to make any changes further, click “Edit and Deploy New Revision”
       
 ![](https://raw.githubusercontent.com/redis-developer/basic-redis-leaderboard-demo-go/master/image2.jpg?v=2&s=2)
       
-## 3. Click “Variables and Secrets”
+
       
 ![](https://raw.githubusercontent.com/redis-developer/basic-redis-leaderboard-demo-go/master/image3.jpg?v=2&s=2)
       
-## 4. Access the app
+## 3. Access the app
       
 ![](https://raw.githubusercontent.com/redis-developer/basic-redis-leaderboard-demo-go/master/image4.jpg?v=2&s=2) 
       
