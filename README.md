@@ -110,6 +110,8 @@ Open up the link under "Manage this application at Cloud Console" to open up "Ed
       
 ![](https://raw.githubusercontent.com/redis-developer/basic-redis-leaderboard-demo-go/master/image4.jpg?v=2&s=2)
       
+## 3. Verify the connector
+      
 ![](https://raw.githubusercontent.com/redis-developer/basic-redis-leaderboard-demo-go/master/image2.jpg?v=2&s=2)
       
 ## 3. Access the app
