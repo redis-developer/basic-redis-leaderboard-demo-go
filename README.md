@@ -6,11 +6,7 @@ Show how the redis works with Golang.
 
 ![How it works](https://github.com/redis-developer/basic-redis-leaderboard-demo-go/raw/master/docs/screenshot001.png)
 
-# Overview video
 
-Here's a short video that explains the project and how it uses Redis:
-
-[![Watch the video on YouTube](https://github.com/redis-developer/basic-redis-leaderboard-demo-go/raw/master/docs/YTThumbnail.png)](https://www.youtube.com/watch?v=zzinHxdZ34I)
 
 # How it works?
 
@@ -92,27 +88,38 @@ Follow: http://localhost:5000
 
 ## How to run on Google Cloud
 
-<p>
-    If you don't have redis yet, plug it in  (https://spring-gcp.saturnism.me/app-dev/cloud-services/cache/memorystore-redis).
-    After successful deployment, you need to manually enable the vpc connector as shown in the pictures:
-</p>
+## 1. Click "Run on Google Cloud"
+      
+Add the right values as per your infratsructure:
+      
+ ```
+ [ ? ] Value of REDIS_HOST environment variable (Redis server host) <Enter your Redis Host URL>
+ [ ? ] Value of REDIS_PORT environment variable (Redis server PORT) <Redis Port>
+ [ ? ] Value of REDIS_PASSWORD environment variable (Redis server password) <Redis Password>
+ [ ? ] Value of API_PUBLIC_PATH environment variable (Public path to frontend, example `/api/public`) /api/
+ [ ? ] Value of IMPORT_PATH environment variable (Path to seed.json file for import, example `/api/seed.json`) seed.json
+ [ ? ] Value of API_PORT environment variable (Api public port, example `8080`) 8080
+```
+      
+![](https://raw.githubusercontent.com/redis-developer/basic-redis-leaderboard-demo-go/master/image1.jpg?v=2&s=2)
+      
+Open up the link under "Manage this application at Cloud Console"
 
-1. Open link google cloud console.
+## 2. Click “Edit and Deploy New Revision”
+      
+If you want to make any changes further, click “Edit and Deploy New Revision”
+      
+![](https://raw.githubusercontent.com/redis-developer/basic-redis-leaderboard-demo-go/master/image1.jpg?v=2&s=2)
+      
+## 3. Click “Variables and Secrets”
+      
+ ![](https://raw.githubusercontent.com/redis-developer/basic-redis-leaderboard-demo-go/master/image3.jpg?v=2&s=2)
+      
+## 4. Access the app
+      
+![](https://raw.githubusercontent.com/redis-developer/basic-redis-leaderboard-demo-go/master/image4.jpg?v=2&s=2) 
+      
+Hence, you should be able to access Rate Limiting app
+  
+      
 
-![1 step](https://github.com/redis-developer/basic-redis-leaderboard-demo-go/raw/master/docs/1.png)
-
-2. Click "Edit and deploy new revision" button.
-
-![2 step](https://github.com/redis-developer/basic-redis-leaderboard-demo-go/raw/master/docs/2.png)
-
-3. Add environment.
-
-![3 step](https://github.com/redis-developer/basic-redis-leaderboard-demo-go/raw/master/docs/3.png)
-
-4.  Select vpc-connector and deploy application.
-
-![4 step](https://github.com/redis-developer/basic-redis-leaderboard-demo-go/raw/master/docs/4.png)
-
-<a href="https://github.com/GoogleCloudPlatform/cloud-run-button/issues/108#issuecomment-554572173">
-Problem with unsupported flags when deploying google cloud run button
-</a>
