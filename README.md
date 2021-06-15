@@ -101,15 +101,11 @@ Add the right values as per your infratsructure:
  [ ? ] Value of API_PORT environment variable (Api public port, example `8080`) 8080
 ```
       
-![](https://raw.githubusercontent.com/redis-developer/basic-redis-leaderboard-demo-go/master/image2.jpg?v=2&s=2)
+![](https://raw.githubusercontent.com/redis-developer/basic-redis-leaderboard-demo-go/master/image0.jpg?v=2&s=2)
       
-Open up the link under "Manage this application at Cloud Console"
+Open up the link under "Manage this application at Cloud Console" to open up "Edit and Deploy New Revision”
 
 ## 2. Click “Variables and Secrets”
-      
-If you want to make any changes further, click “Edit and Deploy New Revision”
-      
-![](https://raw.githubusercontent.com/redis-developer/basic-redis-leaderboard-demo-go/master/image0.jpg?v=2&s=2)
       
 
       
