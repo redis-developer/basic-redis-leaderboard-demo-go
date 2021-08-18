@@ -8,7 +8,10 @@ WORKDIR /build
 
 RUN CGO_ENABLED=0 GOOS=linux go build -o bin .
 
-FROM golang
+# Use distroless as minimal base image to package the manager binary
+# Refer to https://github.com/GoogleContainerTools/distroless for more details
+FROM gcr.io/distroless/static:nonroot
+USER 65532:65532
 
 ENV PORT=$PORT
 ENV API_HOST=""
