@@ -1,6 +1,6 @@
 # Basic Redis Leaderboard Demo Golang
 
-Show how the redis works with Golang.
+Show how the Redis works with Golang.
 
 
 # How it works?
@@ -55,6 +55,20 @@ func (c Controller) Top10() ([]*Company, error) {
 - REDIS_PORT: Redis server port
 - REDIS_PASSWORD: Password to the server
 
+##### Configure by an environment variable with Redis connection string URL
+
+It is possible to pass any valid Redis URL for Redis options as in [ParseURL Example](https://pkg.go.dev/github.com/go-redis/redis?utm_source=gopls#example-ParseURL)
+This way REDIS_HOST, REDIS_PORT, REDIS_PASSWORD are not needed.
+
+        Scheme syntax:
+          Example: redis://user:secret@localhost:6379/0?foo=bar&qux=baz
+
+          This scheme uses a profile of the RFC 3986 generic URI syntax.
+          All URI fields after the scheme are optional.
+          The "userinfo" field uses the traditional "user:password" format.
+
+From [Provisional RFC for Redis URIs](https://www.iana.org/assignments/uri-schemes/prov/redis)
+
 #### Run demo
 
 ```sh
@@ -85,7 +99,7 @@ Follow: http://localhost:8080
 
 ## 1. Click "Run on Google Cloud"
       
-Add the right values as per your infratsructure:
+Add the right values as per your infrastructure:
       
  ```
  [ ? ] Value of REDIS_HOST environment variable (Redis server host) <Enter your Redis Host URL>
@@ -112,10 +126,4 @@ Open up the link under "Manage this application at Cloud Console" to open up "Ed
       
 ![](https://raw.githubusercontent.com/redis-developer/basic-redis-leaderboard-demo-go/master/image5.jpg?v=2&s=2) 
       
-Hence, you should be able to access Rate Limiting app
-      
-
-
-  
-      
-
+Hence, you should be able to access this app
