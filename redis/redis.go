@@ -93,3 +93,11 @@ func NewRedis(config Config) *Redis {
 
 	return r
 }
+
+func NewRedisFromOptions(opt *redis.Options) *Redis {
+	client := redis.NewClient(opt)
+
+	return &Redis{
+		client: client,
+	}
+}
