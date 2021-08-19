@@ -21,7 +21,7 @@ func main() {
 	// ref https://pkg.go.dev/github.com/go-redis/redis?utm_source=gopls#ParseURL
 	var newRedis *redis.Redis
 	url, ok := os.LookupEnv(envRedisURL)
-	if ok {
+	if ok && url != "" {
 		opt, err := goRedis.ParseURL(url)
 		if err != nil {
 			log.Fatalln(err)
