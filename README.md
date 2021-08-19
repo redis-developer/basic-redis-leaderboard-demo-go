@@ -60,6 +60,9 @@ func (c Controller) Top10() ([]*Company, error) {
 It is possible to pass any valid Redis URL for Redis options as in [ParseURL Example](https://pkg.go.dev/github.com/go-redis/redis?utm_source=gopls#example-ParseURL)
 This way REDIS_HOST, REDIS_PORT, REDIS_PASSWORD are not needed.
 
+- REDIS_URL=redis :// [[username :] password@] host [:port][/database]
+- Example REDIS_URL="redis://p%40ssw0rd@redis-16379.hosted.com:16379/0" from [redis-cli, the Redis command line interface](https://redis.io/topics/rediscli)
+
         Scheme syntax:
           Example: redis://user:secret@localhost:6379/0?foo=bar&qux=baz
 
