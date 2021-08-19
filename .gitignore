@@ -1,3 +1,4 @@
 .env
 .env.local
 .idea
+basic-redis-leaderboard-demo-go

@@ -1,14 +1,22 @@
 FROM golang as builder
 
-RUN mkdir /build
+WORKDIR /build
+
+# Copy the Go Modules manifests
+COPY go.mod go.mod
+COPY go.sum go.sum
+# cache deps before building and copying source so that we don't need to re-download as much
+# and so that source changes don't invalidate our downloaded layer
+RUN go mod download
 
 COPY . /build/
 
-WORKDIR /build
-
 RUN CGO_ENABLED=0 GOOS=linux go build -o bin .
 
-FROM golang
+# Use distroless as minimal base image to package the manager binary
+# Refer to https://github.com/GoogleContainerTools/distroless for more details
+FROM gcr.io/distroless/static:nonroot
+USER 65532:65532
 
 ENV PORT=$PORT
 ENV API_HOST=""
@@ -19,8 +27,7 @@ ENV IMPORT_PATH=/api/seed.json
 ENV REDIS_HOST=""
 ENV REDIS_PORT=6379
 ENV REDIS_PASSWORD=""
-
-RUN mkdir /api
+ENV REDIS_URL=""
 
 WORKDIR /build
 
