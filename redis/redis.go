@@ -1,9 +1,13 @@
 package redis
 
 import (
+	"os"
+
 	"github.com/go-redis/redis"
 	"github.com/redis-developer/basic-redis-leaderboard-demo-go/controller"
 )
+
+const envRedisURL = "REDIS_URL"
 
 type Value struct {
 	Score float64
@@ -78,23 +82,26 @@ func (r Redis) Close() error {
 	return r.client.Close()
 }
 
-func NewRedis(config Config) *Redis {
+func NewOptions(config Config) (*redis.Options, error) {
+	// read options from Redis URL
+	url, ok := os.LookupEnv(envRedisURL)
+	if ok && url != "" {
+		// ref https://pkg.go.dev/github.com/go-redis/redis?utm_source=gopls#ParseURL
+		opt, err := redis.ParseURL(url)
+		if err != nil {
+			return nil, err
+		}
+		return opt, nil
+	}
 
-	opt := &redis.Options{
+	// read options from config
+	return &redis.Options{
 		Addr:     config.Addr(),
 		Password: config.Password(),
-	}
-
-	client := redis.NewClient(opt)
-
-	r := &Redis{
-		client: client,
-	}
-
-	return r
+	}, nil
 }
 
-func NewRedisFromOptions(opt *redis.Options) *Redis {
+func New(opt *redis.Options) *Redis {
 	client := redis.NewClient(opt)
 
 	return &Redis{
