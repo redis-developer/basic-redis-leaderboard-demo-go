@@ -118,6 +118,18 @@ func NewOptions(config Config) (opt *redis.Options, err error) {
 		opt.TLSConfig = &tls.Config{
 			RootCAs: rootCertPool,
 		}
+
+		// https://pkg.go.dev/crypto/tls#LoadX509KeyPair
+		clientCert, ok := os.LookupEnv("TLS_CLIENT_CERT")
+		clientKey, ok2 := os.LookupEnv("TLS_CLIENT_KEY")
+		if ok && ok2 {
+			cert, err := tls.LoadX509KeyPair(clientCert, clientKey)
+			if err != nil {
+				return nil, err
+			}
+			opt.TLSConfig.Certificates = []tls.Certificate{cert}
+			opt.TLSConfig.ClientAuth = tls.RequestClientCert
+		}
 	}
 
 	return opt, nil
