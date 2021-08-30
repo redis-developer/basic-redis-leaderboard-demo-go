@@ -116,8 +116,7 @@ func NewOptions(config Config) (opt *redis.Options, err error) {
 			return nil, fmt.Errorf("Failed to append root CA cert at %s", caPath)
 		}
 		opt.TLSConfig = &tls.Config{
-			RootCAs:            rootCertPool,
-			InsecureSkipVerify: true,
+			RootCAs: rootCertPool,
 		}
 	}
 
