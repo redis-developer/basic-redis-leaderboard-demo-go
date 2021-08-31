@@ -74,17 +74,17 @@ From [Provisional RFC for Redis URIs](https://www.iana.org/assignments/uri-schem
 
 ### Secure a connection with Redis with a mutual TLS
 
-To support this feature three new environment variables are introduced, TLS_CA_CERT, TLS_CLIENT_CERT, TLS_CLIENT_KEY. They contain paths to respective files in a mounted secret volume. To use it with Kubernetes pods, add this to a container configuration:
+To support this feature three new environment variables are introduced, TLS_CA_CERT_FILE, TLS_CERT_FILE, TLS_KEY_FILE. Their names are the same as "redis.conf" is using. They contain paths to respective files in a mounted secret volume. To use it with Kubernetes pods, add this to a container configuration:
 
 ```yaml
 spec:
   containers:
   - env:
-      - name: TLS_CA_CERT
+      - name: TLS_CA_CERT_FILE
         value: /certs/ca.crt # path to CA certificate
-      - name: TLS_CLIENT_CERT
+      - name: TLS_CERT_FILE
         value: /certs/tls.crt # path to client certificate
-      - name: TLS_CLIENT_KEY
+      - name: TLS_KEY_FILE
         value: /certs/tls.key # path to client key
     image: ghcr.io/denist-huma/basic-redis-leaderboard-demo-go:1.2.2
     name: leaderboard-tls

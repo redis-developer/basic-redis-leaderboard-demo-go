@@ -104,7 +104,7 @@ func NewOptions(config Config) (opt *redis.Options, err error) {
 	}
 
 	// read CA cert
-	caPath, ok := os.LookupEnv("TLS_CA_CERT")
+	caPath, ok := os.LookupEnv("TLS_CA_CERT_FILE")
 	if ok && caPath != "" {
 		// ref https://pkg.go.dev/crypto/tls#example-Dial
 		rootCertPool := x509.NewCertPool()
@@ -120,15 +120,16 @@ func NewOptions(config Config) (opt *redis.Options, err error) {
 		}
 
 		// https://pkg.go.dev/crypto/tls#LoadX509KeyPair
-		clientCert, ok := os.LookupEnv("TLS_CLIENT_CERT")
-		clientKey, ok2 := os.LookupEnv("TLS_CLIENT_KEY")
+		clientCert, ok := os.LookupEnv("TLS_CERT_FILE")
+		clientKey, ok2 := os.LookupEnv("TLS_KEY_FILE")
 		if ok && ok2 {
 			cert, err := tls.LoadX509KeyPair(clientCert, clientKey)
 			if err != nil {
 				return nil, err
 			}
 			opt.TLSConfig.Certificates = []tls.Certificate{cert}
-			opt.TLSConfig.ClientAuth = tls.RequestClientCert
+			opt.TLSConfig.ClientAuth = tls.RequireAndVerifyClientCert
+			opt.TLSConfig.ClientCAs = rootCertPool
 		}
 	}
 
