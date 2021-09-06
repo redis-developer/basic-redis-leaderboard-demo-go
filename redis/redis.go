@@ -143,3 +143,11 @@ func New(opt *redis.Options) *Redis {
 		client: client,
 	}
 }
+
+func NewRedisFromOptions(opt *redis.Options) *Redis {
+	client := redis.NewClient(opt)
+
+	return &Redis{
+		client: client,
+	}
+}
