@@ -10,8 +10,7 @@
     {
       "url": "heroku/python"
     }
-   ]
-
+   ],
   "env": {
     "REDIS_HOST": {
       "description": "Redis server host",
