@@ -5,6 +5,8 @@ Show how the Redis works with Golang.
 
 # How it works?
 
+![https://raw.githubusercontent.com/redis-developer](https://raw.githubusercontent.com/redis-developer/basic-redis-leaderboard-demo-go/master/image5.jpg?v=2&s=2) 
+
 ## How the data is stored:
 
 - The AAPL's details - market cap of 2,6 triillions and USA origin - are stored in a hash like below:
