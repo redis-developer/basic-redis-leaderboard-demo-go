@@ -1,9 +1,17 @@
 package redis
 
 import (
+	"crypto/tls"
+	"crypto/x509"
+	"fmt"
+	"io/ioutil"
+	"os"
+
 	"github.com/go-redis/redis"
 	"github.com/redis-developer/basic-redis-leaderboard-demo-go/controller"
 )
+
+const envRedisURL = "REDIS_URL"
 
 type Value struct {
 	Score float64
@@ -78,18 +86,68 @@ func (r Redis) Close() error {
 	return r.client.Close()
 }
 
-func NewRedis(config Config) *Redis {
-
-	opt := &redis.Options{
-		Addr:     config.Addr(),
-		Password: config.Password(),
+func NewOptions(config Config) (opt *redis.Options, err error) {
+	// read options from Redis URL
+	url, ok := os.LookupEnv(envRedisURL)
+	if ok && url != "" {
+		// ref https://pkg.go.dev/github.com/go-redis/redis?utm_source=gopls#ParseURL
+		opt, err = redis.ParseURL(url)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		// read options from config
+		opt = &redis.Options{
+			Addr:     config.Addr(),
+			Password: config.Password(),
+		}
 	}
 
+	// read CA cert
+	caPath, ok := os.LookupEnv("TLS_CA_CERT_FILE")
+	if ok && caPath != "" {
+		// ref https://pkg.go.dev/crypto/tls#example-Dial
+		rootCertPool := x509.NewCertPool()
+		pem, err := ioutil.ReadFile(caPath)
+		if err != nil {
+			return nil, err
+		}
+		if ok := rootCertPool.AppendCertsFromPEM(pem); !ok {
+			return nil, fmt.Errorf("Failed to append root CA cert at %s", caPath)
+		}
+		opt.TLSConfig = &tls.Config{
+			RootCAs: rootCertPool,
+		}
+
+		// https://pkg.go.dev/crypto/tls#LoadX509KeyPair
+		clientCert, ok := os.LookupEnv("TLS_CERT_FILE")
+		clientKey, ok2 := os.LookupEnv("TLS_KEY_FILE")
+		if ok && ok2 {
+			cert, err := tls.LoadX509KeyPair(clientCert, clientKey)
+			if err != nil {
+				return nil, err
+			}
+			opt.TLSConfig.Certificates = []tls.Certificate{cert}
+			opt.TLSConfig.ClientAuth = tls.RequireAndVerifyClientCert
+			opt.TLSConfig.ClientCAs = rootCertPool
+		}
+	}
+
+	return opt, nil
+}
+
+func New(opt *redis.Options) *Redis {
 	client := redis.NewClient(opt)
 
-	r := &Redis{
+	return &Redis{
 		client: client,
 	}
+}
 
-	return r
+func NewRedisFromOptions(opt *redis.Options) *Redis {
+	client := redis.NewClient(opt)
+
+	return &Redis{
+		client: client,
+	}
 }
