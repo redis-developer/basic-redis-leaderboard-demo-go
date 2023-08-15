@@ -10,12 +10,14 @@ services:
   api:
     build:
       context: .
-    env_file:
-      - .env
+    environment:
+      - API_PORT=5000
+      - REDIS_HOST=leaderboard-redis
+      - REDIS_PORT=6379
     image: leaderboard-api
     container_name: leaderboard-api
     ports:
-    - 8080:8080
+    - 5000:5000
     volumes:
     - ./seed.json:/seed.json
     - ./public:/public

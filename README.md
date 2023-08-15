@@ -125,7 +125,7 @@ go get
 go run
 ```
 
-Follow: http://localhost:8080
+Follow: http://localhost:5000
 
 ## Try it out
 
@@ -156,7 +156,7 @@ Add the right values as per your infrastructure:
  [ ? ] Value of REDIS_PASSWORD environment variable (Redis server password) <Redis Password>
  [ ? ] Value of API_PUBLIC_PATH environment variable (Public path to frontend, example `/api/public`) /api/
  [ ? ] Value of IMPORT_PATH environment variable (Path to seed.json file for import, example `/api/seed.json`) seed.json
- [ ? ] Value of API_PORT environment variable (Api public port, example `8080`) 8080
+ [ ? ] Value of API_PORT environment variable (Api public port, example `5000`) 5000
 ```
       
       
